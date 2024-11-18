@@ -39,11 +39,11 @@ MY_CHAT_ID = 893646369
 async def start(update: Update, context):
     photo_url = "https://i.pinimg.com/736x/44/2e/36/442e360757ea56fdb16e756588739f2a.jpg"
     keyboard = [
-        [InlineKeyboardButton("🍺 Каталог пива", callback_data="beer_catalog"), InlineKeyboardButton("🦞 Раки и икра", callback_data="seafood_catalog")],
-        [InlineKeyboardButton("🎉 Вечеринки", callback_data="events"), InlineKeyboardButton("🚚 Доставка", callback_data="delivery")],
-        [InlineKeyboardButton("Напитки, лист №1", url="https://business.untappd.com/app/boards/59126"), InlineKeyboardButton("Напитки, лист №2", url="https://business.untappd.com/app/boards/59127")],
-        [InlineKeyboardButton("📞 Связаться", callback_data="contact"), InlineKeyboardButton("🤝 Сотрудничество", callback_data='cooperation')],
-        [InlineKeyboardButton("🤖 Нравится бот", callback_data='robot')]
+        [InlineKeyboardButton("🦞 Раки и икра", callback_data="seafood_catalog"), InlineKeyboardButton("🎉 Вечеринки", callback_data="events")],
+        [InlineKeyboardButton("🚚 Доставка", callback_data="delivery"), InlineKeyboardButton("📞 Связаться", callback_data="contact")],
+        [InlineKeyboardButton("Напитки, лист №1", url="https://business.untappd.com/app/boards/59126")],
+        [InlineKeyboardButton("Напитки, лист №2", url="https://business.untappd.com/app/boards/59127")],
+        [InlineKeyboardButton("🤝 Сотрудничество", callback_data='cooperation'), InlineKeyboardButton("🤖 Нравится бот", callback_data='robot')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_photo(photo=photo_url, caption="Если ты ищешь уютное место, чтобы скоротать вечерок в приятной компании - ты на верном пути!🍺", reply_markup=reply_markup)
@@ -53,12 +53,10 @@ async def button_handler(update: Update, context):
     query = update.callback_query
     data = query.data
 
-    if data == "beer_catalog":
-        await query.message.reply_text("🍺 Вот наш каталог крафтового пива:\n1. IPA\n2. Stout\n3. Lager\nЗаказать можно, нажав на кнопку.")
-    elif data == "seafood_catalog":
-        await query.message.reply_text("🦞 Раки и икра:\n1. Живые раки — 1000 руб/кг\n2. Икра — 500 руб/банка.")
+    if data == "seafood_catalog":
+        await query.message.reply_text("🦞 Раки и икра:\n1. Живые раки\n40-60 — 2100 руб/кг\n60-80 — 2400 руб/кг\n80+ — 2800 руб/кг\n2. Икра\nГорбуша — 3600 руб/банка\nКета — 3800 руб/банка")
     elif data == "events":
-        await query.message.reply_text("🎉 Предстоящие вечеринки:\n- Мафия в пятницу\n- Пивная вечеринка в субботу.\nНажмите на кнопку, чтобы записаться.")
+        await query.message.reply_text("🎉 Предстоящие вечеринки:\n- Мафия в пятницу\n- Пивная вечеринка в субботу.")
     elif data == "delivery":
         await query.message.reply_text("🚚 Для доставки укажите адрес и время и необходимый товар. Оплата производится при получени.")
     elif data == "contact":
